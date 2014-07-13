@@ -1,5 +1,12 @@
 package com.comicon.pamphlet.ui.main;
 
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.SearchView;
+import android.widget.Toast;
+
 import com.comicon.pamphlet.R;
 import com.comicon.pamphlet.ui.main.cirlesList.Fragment01;
 import com.comicon.pamphlet.ui.main.eventInfo.Fragment03;
@@ -7,15 +14,8 @@ import com.comicon.pamphlet.ui.main.favourList.Fragment02;
 import com.common.actionBarActivity.FragmentAdapter;
 import com.common.actionBarActivity.SimpleFragmentActivity;
 
-import android.app.ActionBar;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.SearchView;
-
 public class HomeActivity extends SimpleFragmentActivity{
 
-	private SearchListener listener ;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,6 @@ public class HomeActivity extends SimpleFragmentActivity{
 		adapter.add(new Fragment02());
 		adapter.add(new Fragment03());
 		setFragmentAdapter(adapter);
-		listener = new SearchListener(getApplicationContext());
 		super.onCreate(savedInstanceState);
 	}
 
@@ -36,7 +35,7 @@ public class HomeActivity extends SimpleFragmentActivity{
 		getMenuInflater().inflate(R.menu.home, menu);
 	    SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView(); 
 	    searchView.setQueryHint("快捷搜索");
-	    searchView.setOnQueryTextFocusChangeListener(listener);
+	    SearchListener listener = new SearchListener(this);
 	    searchView.setOnQueryTextListener(listener);
 		return true;
 	}
@@ -44,10 +43,8 @@ public class HomeActivity extends SimpleFragmentActivity{
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()){
-//			case R.id.action_search:startActivity(new Intent(this,SearchActivity.class));break;
 			default :break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
 }

@@ -16,9 +16,9 @@ public class Fragment03 extends PageFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_home_dummy,container, false);
-		TextView text = (TextView) rootView.findViewById(R.id.section_label);
-		text.setText("aaaa");
+		View rootView = inflater.inflate(R.layout.normal_list,container, false);
+//		TextView text = (TextView) rootView.findViewById(R.id.section_label);
+//		text.setText("aaaa");
 		return rootView;
 	}
 

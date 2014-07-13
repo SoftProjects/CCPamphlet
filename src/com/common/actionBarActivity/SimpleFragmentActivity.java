@@ -1,5 +1,8 @@
 package com.common.actionBarActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.comicon.pamphlet.R;
 import com.comicon.pamphlet.R.id;
 
@@ -16,6 +19,7 @@ public class SimpleFragmentActivity extends FragmentActivity{
 	private ActionBar actionBar;
 	private ViewPager mViewPager;
 	protected FragmentAdapter mSectionsPagerAdapter;
+	private List<Tab> tabs;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +36,25 @@ public class SimpleFragmentActivity extends FragmentActivity{
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		mViewPager.setOnPageChangeListener(new OnPageChangeListener());
 
+		tabs = new ArrayList<Tab>();
 		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
 			Tab tab = actionBar.newTab();
 			tab.setText(mSectionsPagerAdapter.getPageTitle(i));
 			tab.setTabListener(new MainTabListener(mSectionsPagerAdapter.getTabListener(i)));
+			tabs.add(tab);
+		}
+		resetTabs();
+	}
+	
+	public void hideTab(){
+		actionBar.removeAllTabs();
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+	}
+	
+	public void resetTabs(){
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		actionBar.removeAllTabs();
+		for(Tab tab:tabs){
 			actionBar.addTab(tab);
 		}
 	}
