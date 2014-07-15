@@ -1,6 +1,8 @@
 package com.comicon.pamphlet.ui.main;
 
 
+import com.comicon.pamphlet.data.model.ItemModel;
+
 import android.content.Context;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,6 +20,6 @@ public class ItemClickListener implements OnItemClickListener{
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
 		//这里要利用adapter.getItem(position)来获取当前position所对应的对象
-		Toast.makeText(context, ((SortModel)adapter.getItem(position)).getName(), Toast.LENGTH_SHORT).show();
+		Toast.makeText(context, ((ItemModel)adapter.getItem(position)).getCircle().getName(), Toast.LENGTH_SHORT).show();
 	}
 }

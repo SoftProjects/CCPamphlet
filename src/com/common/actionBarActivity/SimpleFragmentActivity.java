@@ -34,7 +34,7 @@ public class SimpleFragmentActivity extends FragmentActivity{
 		}
 
 		mViewPager.setAdapter(mSectionsPagerAdapter);
-		mViewPager.setOnPageChangeListener(new OnPageChangeListener());
+		mViewPager.setOnPageChangeListener(new OnPageChangeListener(mSectionsPagerAdapter));
 
 		tabs = new ArrayList<Tab>();
 		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
@@ -84,9 +84,19 @@ public class SimpleFragmentActivity extends FragmentActivity{
 	}
 	
 	private class OnPageChangeListener extends SimpleOnPageChangeListener {
+		private List<TabListener> tabListenerList;
+		
+		public OnPageChangeListener(FragmentAdapter mSectionsPagerAdapter) {
+			tabListenerList = new ArrayList<TabListener>();
+			for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
+				tabListenerList.add(mSectionsPagerAdapter.getTabListener(i));
+			}
+		}
+
 				@Override
 		public void onPageSelected(int position) {
 			actionBar.setSelectedNavigationItem(position);
+			tabListenerList.get(position).onTabSelected(actionBar.getSelectedTab(), null);
 		}
 	}
 }

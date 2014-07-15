@@ -24,6 +24,15 @@
 	    android:layout_height="match_parent" 
 	    android:background="#ffffff"
 	    android:visibility="gone">
-	</FrameLayout>
+        
+        <ListView
+            android:id="@+id/search_result_list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:divider="#d0d0d0"
+            android:dividerHeight="3px" />
+        
+    </FrameLayout>
     
 </FrameLayout>

@@ -3,8 +3,8 @@ package com.comicon.pamphlet.ui.main.cirlesList.sortlist;
 import java.util.List;
 
 import com.comicon.pamphlet.R;
+import com.comicon.pamphlet.data.model.CirclesModel;
 import com.comicon.pamphlet.ui.main.FavourateListener;
-import com.comicon.pamphlet.ui.main.SortModel;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -19,10 +19,10 @@ import android.widget.TextView;
 
 public class SortAdapter extends BaseAdapter{
 	
-	private List<SortModel> list = null;
+	private List<CirclesModel> list = null;
 	private Context mContext;
 	
-	public SortAdapter(Context mContext, List<SortModel> list) {
+	public SortAdapter(Context mContext, List<CirclesModel> list) {
 		this.mContext = mContext;
 		this.list = list;
 	}
@@ -31,7 +31,7 @@ public class SortAdapter extends BaseAdapter{
 	 * 当ListView数据发生变化时,调用此方法来更新ListView
 	 * @param list
 	 */
-	public void updateListView(List<SortModel> list){
+	public void updateListView(List<CirclesModel> list){
 		this.list = list;
 		notifyDataSetChanged();
 	}
@@ -49,7 +49,7 @@ public class SortAdapter extends BaseAdapter{
 	}
 
 	public View getView(final int position, View view, ViewGroup arg2) {
-		final SortModel mContent = list.get(position);
+		final CirclesModel mContent = list.get(position);
 		view = LayoutInflater.from(mContext).inflate(R.layout.sircles_item, null);
 		TextView tvTitle = (TextView) view.findViewById(R.id.title);
 		TextView tvLetter = (TextView) view.findViewById(R.id.catalog);

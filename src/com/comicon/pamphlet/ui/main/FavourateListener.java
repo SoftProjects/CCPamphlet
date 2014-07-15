@@ -1,6 +1,7 @@
 package com.comicon.pamphlet.ui.main;
 
 import com.comicon.pamphlet.R;
+import com.comicon.pamphlet.data.model.CirclesModel;
 
 import android.content.Context;
 import android.view.View;
@@ -10,8 +11,8 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class FavourateListener implements OnClickListener{
-	SortModel model;
-	public FavourateListener(SortModel model) {
+	CirclesModel model;
+	public FavourateListener(CirclesModel model) {
 		this.model = model;
 	}
 

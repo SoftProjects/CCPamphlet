@@ -1,13 +1,12 @@
 package com.comicon.pamphlet.ui.main.cirlesList;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import com.comicon.pamphlet.R;
-import com.comicon.pamphlet.data.bean.Circles;
+import com.comicon.pamphlet.data.cotroller.Controller;
+import com.comicon.pamphlet.data.model.CirclesModel;
 import com.comicon.pamphlet.ui.main.ItemClickListener;
-import com.comicon.pamphlet.ui.main.SortModel;
+import com.comicon.pamphlet.ui.main.Resourcer;
 import com.comicon.pamphlet.ui.main.cirlesList.sortlist.PinyinComparator;
 import com.comicon.pamphlet.ui.main.cirlesList.sortlist.SideBar;
 import com.comicon.pamphlet.ui.main.cirlesList.sortlist.SortAdapter;
@@ -23,8 +22,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class Fragment01 extends PageFragment {
+	private Resourcer resourcer;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+		resourcer = Controller.instance(this.getActivity().getApplicationContext());
 		View rootView = inflater.inflate(R.layout.sircles_list,container, false);
 		initViews(rootView);
 		return rootView;
@@ -42,8 +43,8 @@ public class Fragment01 extends PageFragment {
 		sideBar.setTextView(dialog);
 		
 		final ListView sortListView = (ListView) rootView.findViewById(R.id.country_lvcountry);
-		
-		List<SortModel> SourceDateList = getSourceDateList();
+		//获取数据
+		List<CirclesModel> SourceDateList = resourcer.getAllList();
 		Collections.sort(SourceDateList,  new PinyinComparator());
 		
 		final SortAdapter adapter = new SortAdapter(context, SourceDateList);
@@ -51,7 +52,6 @@ public class Fragment01 extends PageFragment {
 		sortListView.setAdapter(adapter);
 
 		sideBar.setOnTouchingLetterChangedListener(new OnTouchingLetterChangedListener() {
-			
 			@Override
 			public void onTouchingLetterChanged(String s) {
 				//该字母首次出现的位置
@@ -61,38 +61,5 @@ public class Fragment01 extends PageFragment {
 				}
 			}
 		});
-	}
-	
-	private List<SortModel> getSourceDateList(){
-		List<SortModel> SourceDateList = new ArrayList<SortModel>();
-		
-		SourceDateList.add(new Circles("aa"));
-		SourceDateList.add(new Circles("你好"));
-		SourceDateList.add(new Circles("你好"));
-		SourceDateList.add(new Circles("你好"));
-		SourceDateList.add(new Circles("你好"));
-		SourceDateList.add(new Circles("你好"));
-		SourceDateList.add(new Circles("你好"));
-		SourceDateList.add(new Circles("你好"));
-		SourceDateList.add(new Circles("你好"));
-		SourceDateList.add(new Circles("你好"));
-		SourceDateList.add(new Circles("你好"));
-		SourceDateList.add(new Circles("你好"));
-		SourceDateList.add(new Circles("你好"));
-		SourceDateList.add(new Circles("gg好gg好"));
-		SourceDateList.add(new Circles("烦烦烦"));
-		SourceDateList.add(new Circles("烦烦烦"));
-		SourceDateList.add(new Circles("烦烦烦"));
-		SourceDateList.add(new Circles("烦烦烦"));
-		SourceDateList.add(new Circles("烦烦烦"));
-		SourceDateList.add(new Circles("烦烦烦"));
-		SourceDateList.add(new Circles("烦烦烦"));
-		SourceDateList.add(new Circles("烦烦烦"));
-		SourceDateList.add(new Circles("烦烦烦"));
-		SourceDateList.add(new Circles("烦烦烦"));
-		SourceDateList.add(new Circles("烦烦烦"));
-		SourceDateList.add(new Circles("烦烦烦"));
-		SourceDateList.add(new Circles("烦烦烦"));
-		return SourceDateList;
 	}
 }

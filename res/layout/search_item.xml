@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:descendantFocusability="blocksDescendants" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0" 
+        android:layout_marginRight="20dip"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="8dip"
+            android:gravity="center_vertical"
+            android:paddingBottom="2dip"
+            android:paddingLeft="5dip"
+            android:paddingTop="10dip"
+            android:text="hhhh"
+            android:textColor="#202020"
+            android:textSize="18dp" />
+               
+		<TextView
+            android:id="@+id/sub_title"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="8dip"
+            android:gravity="center_vertical"
+            android:paddingBottom="10dip"
+            android:paddingLeft="10dip"
+            android:paddingTop="2dip"
+            android:text="hhhh"
+            android:textColor="#505050"
+            android:textSize="14dp" />
+    </LinearLayout>
+    
+    <ImageButton
+        android:id="@+id/favour"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="50dip"
+        android:layout_height="fill_parent"
+        android:background="#00000000"
+        android:src="@drawable/rating_not_important" 
+        android:visibility="gone"/>
+</LinearLayout>
