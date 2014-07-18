@@ -31,7 +31,7 @@ public class HomeActivity extends SimpleFragmentActivity{
 		adapter.add(new Fragment02());
 		adapter.add(new Fragment03());
 		setFragmentAdapter(adapter);
-		
+		//my test for github
 		ListView searchReult = (ListView) findViewById(R.id.search_result_list);
 		
 		searchAdapter = new SearchListAdapter(this, new ArrayList<WorkModel>());
