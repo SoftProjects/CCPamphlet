@@ -39,12 +39,38 @@
             android:textSize="14dp" />
     </LinearLayout>
     
-    <ImageButton
-        android:id="@+id/favour"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="50dip"
-        android:layout_height="fill_parent"
-        android:background="#00000000"
-        android:src="@drawable/rating_not_important" 
-        android:visibility="gone"/>
+   	<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0" 
+        android:orientation="vertical"
+		android:layout_marginRight="20dip"
+        android:gravity="right" >
+		<TextView
+		    android:id="@+id/work_privce"
+		    android:layout_width="wrap_content"
+		    android:layout_height="fill_parent"
+		    android:gravity="center_vertical"
+		    android:text="hhhh"
+		    android:textColor="#000000"
+			android:textSize="14dp" />
+		
+		<TextView
+		    android:id="@+id/work_category"
+		    android:layout_width="wrap_content"
+		    android:layout_height="fill_parent"
+		    android:gravity="center_vertical"
+		    android:text="hhhh"
+		    android:textColor="#000000"
+			android:textSize="14dp" />
+		
+		<TextView
+		    android:id="@+id/work_theme"
+		    android:layout_width="wrap_content"
+		    android:layout_height="fill_parent"
+		    android:gravity="center_vertical"
+		    android:text="hhhh"
+		    android:textColor="#000000"
+			android:textSize="14dp" />
+	</LinearLayout>
 </LinearLayout>

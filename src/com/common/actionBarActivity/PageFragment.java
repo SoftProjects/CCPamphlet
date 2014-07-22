@@ -6,7 +6,9 @@ import android.app.ActionBar.TabListener;
 import android.support.v4.app.Fragment;
 
 public abstract class PageFragment extends Fragment {
+	protected boolean autoRefresh = false;
 	public abstract String getTitle();
+	public abstract void refresh();
 	public TabListener getTabListener(){
 		return new TabListener() {
 			@Override
@@ -15,6 +17,7 @@ public abstract class PageFragment extends Fragment {
 			
 			@Override
 			public void onTabSelected(Tab tab, FragmentTransaction ft) {
+				if(autoRefresh)refresh();
 			}
 			
 			@Override

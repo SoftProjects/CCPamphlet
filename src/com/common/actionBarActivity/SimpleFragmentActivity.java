@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.comicon.pamphlet.R;
-import com.comicon.pamphlet.R.id;
-
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.app.ActionBar.Tab;
@@ -35,7 +33,7 @@ public class SimpleFragmentActivity extends FragmentActivity{
 
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		mViewPager.setOnPageChangeListener(new OnPageChangeListener(mSectionsPagerAdapter));
-
+		mViewPager.setOffscreenPageLimit(2);
 		tabs = new ArrayList<Tab>();
 		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
 			Tab tab = actionBar.newTab();

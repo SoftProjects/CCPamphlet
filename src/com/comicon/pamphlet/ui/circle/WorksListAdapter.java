@@ -1,4 +1,4 @@
-package com.comicon.pamphlet.ui.main.searchlist;
+package com.comicon.pamphlet.ui.circle;
 
 import java.util.List;
 
@@ -18,12 +18,12 @@ import android.widget.ImageButton;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
-public class SearchListAdapter extends BaseAdapter{
+public class WorksListAdapter extends BaseAdapter{
 	
 	private List<WorkModel> list = null;
 	private Context mContext;
 	
-	public SearchListAdapter(Context mContext, List<WorkModel> list) {
+	public WorksListAdapter(Context mContext, List<WorkModel> list) {
 		this.mContext = mContext;
 		this.list = list;
 	}
@@ -56,15 +56,13 @@ public class SearchListAdapter extends BaseAdapter{
 		TextView tvPrice = (TextView) view.findViewById(R.id.work_privce);
 		TextView tvCategory = (TextView) view.findViewById(R.id.work_category);
 		TextView tvTheme = (TextView) view.findViewById(R.id.work_theme);
-
 		WorkModel work = this.list.get(position);
 		tvTitle.setText(work.getName());
-		tvSubTitle.setText(work.getCircle().getName());
+		tvSubTitle.setText(work.getSample());
 		tvPrice.setText("价格："+(work.getPrice().trim().equals("")?"不详":work.getPrice()));
 		tvTheme.setText("主题："+(work.getTheme().trim().equals("")?"不详":work.getTheme()));
 		tvCategory.setText("类型："+(work.getCategory().trim().equals("")?"不详":work.getCategory()));
 		return view;
-
 	}
 	
 }

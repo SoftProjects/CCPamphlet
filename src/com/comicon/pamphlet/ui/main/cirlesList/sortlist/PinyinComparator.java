@@ -2,16 +2,16 @@ package com.comicon.pamphlet.ui.main.cirlesList.sortlist;
 
 import java.util.Comparator;
 
-import com.comicon.pamphlet.data.model.CirclesModel;
+import com.comicon.pamphlet.data.model.CircleModel;
 
 /**
  * 
  * @author xiaanming
  *
  */
-public class PinyinComparator implements Comparator<CirclesModel> {
+public class PinyinComparator implements Comparator<CircleModel> {
 
-	public int compare(CirclesModel o1, CirclesModel o2) {
+	public int compare(CircleModel o1, CircleModel o2) {
 		if (o1.getSortLetters().equals("@")
 				|| o2.getSortLetters().equals("#")) {
 			return -1;
