@@ -1,12 +1,15 @@
 package com.comicon.pamphlet.ui.main.cirlesList.sortlist;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.comicon.pamphlet.R;
-import com.comicon.pamphlet.data.model.CirclesModel;
+import com.comicon.pamphlet.data.model.CircleModel;
 import com.comicon.pamphlet.ui.main.FavourateListener;
 
 import android.content.Context;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +17,16 @@ import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 public class SortAdapter extends BaseAdapter{
 	
-	private List<CirclesModel> list = null;
+	private List<CircleModel> list = null;
 	private Context mContext;
 	
-	public SortAdapter(Context mContext, List<CirclesModel> list) {
+	public SortAdapter(Context mContext, List<CircleModel> list) {
 		this.mContext = mContext;
 		this.list = list;
 	}
@@ -31,7 +35,7 @@ public class SortAdapter extends BaseAdapter{
 	 * 当ListView数据发生变化时,调用此方法来更新ListView
 	 * @param list
 	 */
-	public void updateListView(List<CirclesModel> list){
+	public void updateListView(List<CircleModel> list){
 		this.list = list;
 		notifyDataSetChanged();
 	}
@@ -48,8 +52,9 @@ public class SortAdapter extends BaseAdapter{
 		return position;
 	}
 
+	
 	public View getView(final int position, View view, ViewGroup arg2) {
-		final CirclesModel mContent = list.get(position);
+		final CircleModel mContent = list.get(position);
 		view = LayoutInflater.from(mContext).inflate(R.layout.sircles_item, null);
 		TextView tvTitle = (TextView) view.findViewById(R.id.title);
 		TextView tvLetter = (TextView) view.findViewById(R.id.catalog);
@@ -61,14 +66,15 @@ public class SortAdapter extends BaseAdapter{
 		//如果当前位置等于该分类首字母的Char的位置 ，则认为是第一次出现
 		if(position == getPositionForSection(section)){
 			tvLetter.setVisibility(View.VISIBLE);
-			tvLetter.setText(mContent.getSortLetters());
+			tvLetter.setText(mContent.getSortLetters().substring(0,1));
 		}else{
 			tvLetter.setVisibility(View.GONE);
 		}
 	
-		tvTitle.setText(this.list.get(position).getName());
+		tvTitle.setText(mContent.getName()+" "+mContent.getOrder());
 		tvButton.setImageResource(mContent.isFavorite()?R.drawable.rating_important:R.drawable.rating_not_important);
 		tvButton.setOnClickListener(new FavourateListener(mContent));
+		
 		return view;
 
 	}
