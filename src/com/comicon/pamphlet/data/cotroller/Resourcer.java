@@ -13,6 +13,7 @@ public interface Resourcer {
 	public List<CircleModel> getFavouriteList();
 	public List<WorkModel> getSearchResult(String search);
 	public void update(Handler handler);
-	public void sendResponse(String s);
+	public void sendResponse(String s,Handler handler);
 	public void initial();
+	public void checkUpdate(Handler updateHandler);
 }

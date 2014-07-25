@@ -3,19 +3,16 @@ package com.comicon.pamphlet.ui.circle;
 import java.util.List;
 
 import com.comicon.pamphlet.R;
-import com.comicon.pamphlet.data.model.CircleModel;
 import com.comicon.pamphlet.data.model.WorkModel;
-import com.comicon.pamphlet.ui.main.FavourateListener;
-
 import android.content.Context;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.URLSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 public class WorksListAdapter extends BaseAdapter{
@@ -58,7 +55,12 @@ public class WorksListAdapter extends BaseAdapter{
 		TextView tvTheme = (TextView) view.findViewById(R.id.work_theme);
 		WorkModel work = this.list.get(position);
 		tvTitle.setText(work.getName());
-		tvSubTitle.setText(work.getSample());
+		
+		SpannableString ss = new SpannableString(work.getSample());
+		ss.setSpan(new URLSpan(work.getSample()), 0, work.getSample().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		tvSubTitle.setText(ss);
+		tvSubTitle.setMovementMethod(LinkMovementMethod.getInstance());
+		
 		tvPrice.setText("价格："+(work.getPrice().trim().equals("")?"不详":work.getPrice()));
 		tvTheme.setText("主题："+(work.getTheme().trim().equals("")?"不详":work.getTheme()));
 		tvCategory.setText("类型："+(work.getCategory().trim().equals("")?"不详":work.getCategory()));

@@ -8,14 +8,14 @@ import android.content.Context;
 import android.os.Handler;
 import android.widget.Toast;
 
+import com.comicon.pamphlet.data.appsetting.Data;
+import com.comicon.pamphlet.data.appsetting.UpdateResult;
 import com.comicon.pamphlet.data.dataBase.DataBase;
 import com.comicon.pamphlet.data.model.CircleModel;
 import com.comicon.pamphlet.data.model.WorkModel;
 import com.common.httplinker.*;
 
 public class Controller implements Resourcer {
-	private String testUrl = "http://whitecomet.net/5066771dc042a8e4730680c5b91c7537.html";
-	private String dataUrl = "http://twzc.comicon1111.org/?c=api&a=getcdb&key=2ECBBB73";
 	public static Resourcer instance(Context context){
 		return new Controller(context);
 	}
@@ -23,7 +23,7 @@ public class Controller implements Resourcer {
 	private Context context;
 	
 	private Controller(Context context){
-		this.context = context;
+		this.context = context.getApplicationContext();
 	}
 	@Override
 	public List<CircleModel> getAllList() {
@@ -40,16 +40,23 @@ public class Controller implements Resourcer {
 
 	@Override
 	public void update(final Handler handler) {
+		handler.sendEmptyMessage(0);
 		new Thread(){
 			@Override
 			public void run() {
-				handler.sendEmptyMessage(1);
-				HttpLinkClient client = new HttpLinkClient();
-				String result = client.synGet(testUrl, null);
-				handler.sendEmptyMessage(2);
 				try {
+					UpdateResult checkResult = checkUpdate();
+					if(checkResult.getUpdateCode().equals(Data.instance(context).getUpdateCode())) {
+						handler.sendEmptyMessage(5);
+						return;
+					}
+					handler.sendEmptyMessage(1);
+					HttpLinkClient client = new HttpLinkClient();
+					String result = client.synGet(Data.instance(context).getDataUrl(), null);
+					handler.sendEmptyMessage(2);
 					DataBase.instance(context.getApplicationContext()).updateData(result);
 					handler.sendEmptyMessage(3);
+					Data.instance(context).setUpdated(checkResult.getUpdateCode());
 				} catch (Exception e) {
 					handler.sendEmptyMessage(4);
 				}
@@ -59,7 +66,7 @@ public class Controller implements Resourcer {
 	}
 
 	@Override
-	public void sendResponse(String s) {
+	public void sendResponse(String s,Handler handler) {
 		// TODO Auto-generated method stub
 		Toast.makeText(context, "发送成功"+s, Toast.LENGTH_LONG).show();
 	}
@@ -67,5 +74,26 @@ public class Controller implements Resourcer {
 	@Override
 	public void initial() {
 		DataBase.instance(context).initialData();
+	}
+	
+	@Override
+	public void checkUpdate(final Handler handler) {
+		new Thread(){
+			@Override
+			public void run() {
+				UpdateResult result = checkUpdate();
+				if(result == null) return;
+				boolean isUpdate = !result.getUpdateCode().equals(Data.instance(context).getUpdateCode());
+				if(handler!=null && isUpdate)handler.sendEmptyMessage(6);
+				//TODO check APP update
+			}
+		}.start();
+	}
+	
+	private UpdateResult checkUpdate(){
+		HttpLinkClient client = new HttpLinkClient();
+		Data.instance(context);
+		String result = client.synGet(Data.CHECK_URL, null);
+		return Data.instance(context).refresh(result);
 	}
 }

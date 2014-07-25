@@ -63,6 +63,8 @@
 		            android:layout_alignParentLeft="true"
 		            android:layout_below="@+id/circle_property"
 		            android:layout_marginTop="5dp"
+		            android:lines="3"
+		            android:ellipsize="marquee"
 		            android:text="社团主页" />
 
             </RelativeLayout>

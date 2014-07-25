@@ -19,6 +19,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.comicon.pamphlet.R;
+import com.comicon.pamphlet.data.appsetting.Data;
 import com.comicon.pamphlet.data.cotroller.Controller;
 import com.comicon.pamphlet.data.model.WorkModel;
 import com.comicon.pamphlet.ui.main.cirlesList.Fragment01;
@@ -59,6 +60,8 @@ public class HomeActivity extends SimpleFragmentActivity{
 		searchReult.setAdapter(searchAdapter);
 		
 		super.onCreate(savedInstanceState);
+		
+		Controller.instance(this).checkUpdate(updateHandler);
 	}
 	
 	@Override
@@ -77,42 +80,42 @@ public class HomeActivity extends SimpleFragmentActivity{
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()){
 			case R.id.action_refresh:
-				Controller.instance(this).update(new UpdateHandler());break;
+				Controller.instance(this).update(updateHandler);break;
 			case R.id.action_response:respond();break;
 			default :break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
 	
-	
-	private class UpdateHandler extends Handler{
-		private AlertDialog alert;
-		private UpdateHandler(){
-			mDialog = ProgressDialog.show(HomeActivity.this, "请等待……", "正在建立连接",true);
-			alert = new AlertDialog.Builder(HomeActivity.this).setPositiveButton("确定",null).create();
-			
-		}
-		private ProgressDialog mDialog;
+	private Handler updateHandler = new Handler(){
+		private ProgressDialog mDialog = null;
 		@Override
 		public void handleMessage(Message msg) {
 			switch(msg.what){
-				case 0:break;
+				case 0:mDialog = ProgressDialog.show(HomeActivity.this, "请等待……", "正在建立连接",true);break;
 				case 1:mDialog.setMessage("下载中……");break;
 				case 2:mDialog.setMessage("数据保存中……");break;
 				case 3:mDialog.dismiss();
-						alert.setTitle("成功");
-						alert.show();
+						getDialogue("成功").show();
 						fresh();
 						break;
 				case 4: mDialog.dismiss();
-						alert.setTitle("失败");
-						alert.show();
+						getDialogue("失败").show();
+						break;
+				case 5: if(mDialog!=null) mDialog.dismiss();
+						getDialogue("无需更新").show();
+						break;
+				case 6: if(mDialog!=null) mDialog.dismiss();
+						getDialogue("发现数据更新").show();
 						break;
 				default:break;
 			}
 			super.handleMessage(msg);
 		}
-	}
+		private AlertDialog getDialogue(String string){
+			return new AlertDialog.Builder(HomeActivity.this).setPositiveButton("确定",null).setTitle(string).create();
+		}
+	};
 
 	private void fresh(){
 		for(PageFragment pf:fragments){
@@ -126,7 +129,8 @@ public class HomeActivity extends SimpleFragmentActivity{
 		.setPositiveButton("发送", new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				Controller.instance(HomeActivity.this).sendResponse(input.getText().toString());
+				//TODO
+				Controller.instance(HomeActivity.this).sendResponse(input.getText().toString(),null);
 			}
 		})
 		.setTitle("意见反馈")

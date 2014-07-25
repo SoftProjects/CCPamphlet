@@ -36,6 +36,8 @@
             android:paddingTop="2dip"
             android:text="hhhh"
             android:textColor="#505050"
+			android:singleLine="true"
+            android:ellipsize="marquee" 
             android:textSize="14dp" />
     </LinearLayout>
     

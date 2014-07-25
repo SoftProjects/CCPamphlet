@@ -14,19 +14,18 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import com.comicon.pamphlet.R;
+import com.comicon.pamphlet.data.appsetting.Data;
 import com.common.actionBarActivity.PageFragment;
 import com.common.imageLoader.*;
 
 public class Fragment03 extends PageFragment {
-	public static final String ARG_SECTION_NUMBER = "section_number";
-	public static final String IMAGE_CACHE = "/mnt/sdcard/ComiCon/";
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.even_info,container, false);
-		ImageLoader il = new ImageLoader(IMAGE_CACHE);
+		ImageLoader il = new ImageLoader(Data.IMAGE_CACHE);
 		final ImageView siteMap = (ImageView)rootView.findViewById(R.id.site_map);
 		final ImageView localMap = (ImageView)rootView.findViewById(R.id.local_map);
-		il.setBitmap(siteMap, "http://bbs.comicon1111.org/pics/cc12/CC12PLANO3.jpg",new Handler(){
+		il.setBitmap(siteMap, Data.instance(getActivity()).getLocalmapUrl(),new Handler(){
 			@Override
 			public void handleMessage(Message msg) {
 				super.handleMessage(msg);
@@ -34,12 +33,12 @@ public class Fragment03 extends PageFragment {
 				siteMap.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						show(new File(IMAGE_CACHE+"CC12PLANO3.jpg"));
+						show(new File(Data.IMAGE_CACHE+ImageLoader.getBitmapName(Data.instance(getActivity()).getLocalmapUrl())));
 					}
 				});
 			}
 		});
-		il.setBitmap(localMap, "http://bbs.comicon1111.org/pics/cc13/map2.jpg",new Handler(){
+		il.setBitmap(localMap, Data.instance(getActivity()).getMapUrl(),new Handler(){
 			@Override
 			public void handleMessage(Message msg) {
 				super.handleMessage(msg);
@@ -47,7 +46,7 @@ public class Fragment03 extends PageFragment {
 				localMap.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						show(new File(IMAGE_CACHE+"map2.jpg"));
+						show(new File(Data.IMAGE_CACHE+ImageLoader.getBitmapName(Data.instance(getActivity()).getMapUrl())));
 					}
 				});
 			}

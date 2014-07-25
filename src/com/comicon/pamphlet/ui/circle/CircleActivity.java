@@ -9,6 +9,10 @@ import com.comicon.pamphlet.data.model.WorkModel;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.URLSpan;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +33,12 @@ public class CircleActivity extends Activity{
 		
 		name.setText(circle.getName());
 		order.setText(circle.getOrder());
-		site.setText(circle.getSite());
+
+		SpannableString ss = new SpannableString(circle.getSite());
+		ss.setSpan(new URLSpan(circle.getSite()), 0, circle.getSite().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		site.setText(ss);
+		site.setMovementMethod(LinkMovementMethod.getInstance());
+		
 		property.setText(circle.getProperty());
 		
 		List<WorkModel> works = circle.getWorks();
