@@ -16,4 +16,5 @@ public interface Resourcer {
 	public void sendResponse(String s,Handler handler);
 	public void initial();
 	public void checkUpdate(Handler updateHandler);
+	public CircleModel getCircle(int cid);
 }

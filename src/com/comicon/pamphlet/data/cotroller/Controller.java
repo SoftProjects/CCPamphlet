@@ -96,4 +96,9 @@ public class Controller implements Resourcer {
 		String result = client.synGet(Data.CHECK_URL, null);
 		return Data.instance(context).refresh(result);
 	}
+	@Override
+	public CircleModel getCircle(int cid) {
+		DataBase.instance(context).getCircle(cid);
+		return null;
+	}
 }

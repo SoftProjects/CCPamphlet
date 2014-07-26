@@ -153,7 +153,7 @@ public class DataBase extends AbstractDataBase {
 		return ret;
 	}
 	
-	private CircleModel getCircle(int cid){
+	public CircleModel getCircle(int cid){
 		return circleCache.get(cid);
 	}
 	
