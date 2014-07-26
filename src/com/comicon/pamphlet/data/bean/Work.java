@@ -20,6 +20,7 @@ public class Work implements WorkModel {
 		this.category = category;
 		this.theme = theme;
 		this.price = price;
+		if(!sample.startsWith("http:"))sample = "http://"+sample;
 		this.sample = sample;
 	}
 	

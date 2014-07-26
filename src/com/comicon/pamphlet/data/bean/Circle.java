@@ -26,6 +26,7 @@ public class Circle implements CircleModel{
 		this.cid = cid;
 		this.name = name;
 		this.mode = mode;
+		if(!site.startsWith("http:"))site="http://"+site;
 		this.site = site;
 		this.property = property;
 		this.boothnum = boothnum;
@@ -33,7 +34,7 @@ public class Circle implements CircleModel{
 		this.isFavour = isFavour;
 //		String pinyin = CharacterParser.getInstance().getSelling(name);
 //		sortLetters = pinyin.substring(0, 1).toUpperCase();
-		sortLetters = (order!=null && !order.equals(""))?order:"???";
+		sortLetters = (order!=null && !order.equals(""))?order.substring(0,1):"???";
 	}
 	
 	@Override
