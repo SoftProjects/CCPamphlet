@@ -19,6 +19,9 @@ public class Work implements WorkModel {
 		this.mode = mode;
 		this.category = category;
 		this.theme = theme;
+		price = price.replace("RMB", "");
+		price = price.replace("rmb", "");
+		price = price.replace("元", "");
 		this.price = price;
 		if(!sample.startsWith("http:"))sample = "http://"+sample;
 		this.sample = sample;

@@ -61,7 +61,7 @@ public class WorksListAdapter extends BaseAdapter{
 		tvSubTitle.setText(ss);
 		tvSubTitle.setMovementMethod(LinkMovementMethod.getInstance());
 		
-		tvPrice.setText("价格："+(work.getPrice().trim().equals("")?"不详":work.getPrice()));
+		tvPrice.setText("价格："+(work.getPrice().trim().equals("")?"不详":work.getPrice()+"元"));
 		tvTheme.setText("主题："+(work.getTheme().trim().equals("")?"不详":work.getTheme()));
 		tvCategory.setText("类型："+(work.getCategory().trim().equals("")?"不详":work.getCategory()));
 		return view;
