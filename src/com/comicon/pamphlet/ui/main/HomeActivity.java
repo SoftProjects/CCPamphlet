@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.comicon.pamphlet.R;
 import com.comicon.pamphlet.data.appsetting.Data;
@@ -129,8 +130,13 @@ public class HomeActivity extends SimpleFragmentActivity{
 		.setPositiveButton("发送", new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				//TODO
-				Controller.instance(HomeActivity.this).sendResponse(input.getText().toString(),null);
+				Controller.instance(HomeActivity.this).sendResponse(input.getText().toString(),new Handler(){
+					@Override
+					public void handleMessage(Message msg) {
+						Toast.makeText(HomeActivity.this, "发送成功", Toast.LENGTH_LONG).show();
+					}
+					
+				});
 			}
 		})
 		.setTitle("意见反馈")
