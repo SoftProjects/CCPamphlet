@@ -71,7 +71,7 @@ public class SortAdapter extends BaseAdapter{
 			tvLetter.setVisibility(View.GONE);
 		}
 	
-		tvTitle.setText(mContent.getName()+" "+mContent.getOrder());
+		tvTitle.setText(mContent.getOrder()+"  "+mContent.getName());
 		tvButton.setImageResource(mContent.isFavorite()?R.drawable.rating_important:R.drawable.rating_not_important);
 		tvButton.setOnClickListener(new FavourateListener(mContent));
 		
